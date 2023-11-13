@@ -1,0 +1,11 @@
+{
+  "name": "request-background",
+  "description": "Request Background Runtime In Browser",
+  "keywords": [
+    "Background Runtime"
+  ],
+  "version": "1.0.0",
+  "module": "output/index.js",
+  "type": "module",
+  "license": "MIT",
+}
