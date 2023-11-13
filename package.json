@@ -18,5 +18,8 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
     "rollup": "^4.4.0"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.3"
   }
 }
