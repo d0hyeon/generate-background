@@ -2,10 +2,9 @@
 import { TypedMessageEvent, TypedWorker } from "./TypedWorker";
 import { nanoid } from 'nanoid';
 
-
-export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response> {
-  constructor(src: string) {
-    super(src);
+export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response> implements Worker {
+  constructor(scriptURL: string | URL, options?: WorkerOptions) {
+    super(scriptURL, options);
   }
 
   subscribe<R = Response>(observer: (response: R) => void) {
