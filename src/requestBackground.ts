@@ -1,7 +1,7 @@
-import { UtilWorker } from "./UtilWorker";
-import { WorkerBuilder } from "./WorkerBuilder";
+import { UtilWorker } from "./modules/UtilWorker";
+import { WorkerBuilder } from "./modules/WorkerBuilder";
 
-export function requestBackground<ReturnValue = void>(fn: () => ReturnValue) {
+export function requestBackground<ReturnValue = unknown>(fn: () => ReturnValue) {
   const worker = WorkerBuilder.fromModule(
     UtilWorker,
     { module: fn }
