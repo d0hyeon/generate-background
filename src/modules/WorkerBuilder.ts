@@ -1,6 +1,4 @@
 
-
-
 interface WorkerConstructor<Worker> {
   new(scriptURL: string | URL, options?: WorkerOptions): Worker;
   prototype: Worker;
@@ -11,8 +9,8 @@ interface Options<Payload = unknown, ReturnValue = void> extends WorkerOptions {
 }
 
 export class WorkerBuilder {
-  static fromModule<Worker>(
-    Worker: WorkerConstructor<Worker>,
+  static fromModule<W extends Worker>(
+    Worker: WorkerConstructor<W>,
     { module, ...options }: Options
   ) {
     const code = `
