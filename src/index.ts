@@ -1,1 +1,1 @@
-export { generateBackground } from './generateBackground';
+export { background } from './background';

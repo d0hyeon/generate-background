@@ -19,10 +19,10 @@ But you can use WebWorker API.
 
 ## Example
 
-**generateBackground**
+**background**
 ```ts
 async function runLongTask () {
-  const getCoordinate = generateBackground((imageData: ImageData) => {
+  const getCoordinate = background((imageData: ImageData) => {
     const { data, width } = imageData;
 
     let [
