@@ -1,23 +1,31 @@
 
-import { UtilWorker } from "./UtilWorker";
 
 
-export class WorkerBuilder<Payload, Response> {
-  static fromModule<Payload, Response>(
-    fn: (data: Payload) => Response,
-    Worker = UtilWorker,
+interface WorkerConstructor<Worker> {
+  new(scriptURL: string | URL, options?: WorkerOptions): Worker;
+  prototype: Worker;
+}
+
+interface Options<Payload = unknown, ReturnValue = void> extends WorkerOptions {
+  module: (payload: Payload) => ReturnValue;
+}
+
+export class WorkerBuilder {
+  static fromModule<Worker>(
+    Worker: WorkerConstructor<Worker>,
+    { module, ...options }: Options
   ) {
     const code = `
         self.addEventListener('message', event => {
           const { id, payload } = event.data;
-          const result = (${fn.toString()})(payload);
+          const result = (${module.toString()})(payload);
           
           self.postMessage({ id, payload: result });
         });
       `.trim();
     const blob = new Blob([code]);
 
-    return new Worker<Parameters<typeof fn>[0], ReturnType<typeof fn>>(URL.createObjectURL(blob));
+    return new Worker(URL.createObjectURL(blob), options);
   }
 }
 
