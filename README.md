@@ -1,4 +1,4 @@
-# Request Background
+# Generate Background
 This module does not actually run in the background.  
 이 모듈은 실제로 백그라운드에서 동작하지는 않습니다. 
 
