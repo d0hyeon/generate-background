@@ -33,10 +33,10 @@ async function runLongTask () {
 
 ```
 
-**background**
+**generateBackground**
 ```ts
 async function runLongTask () {
-  const getCoordinate = background((imageData: ImageData) => {
+  const getCoordinate = generateBackground((imageData: ImageData) => {
     const { data, width } = imageData;
 
     let [

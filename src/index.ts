@@ -1,2 +1,2 @@
 export { requestBackground } from './requestBackground';
-export { background } from './withBackground';
+export { generateBackground } from './generateBackground';
