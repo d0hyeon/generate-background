@@ -10,7 +10,7 @@ Most Workrs don't need to using this module.
 Recommended for long task  
 대부분의 경우 이 모듈을 사용할 필요는 없으나, long task를 처리해야 할 경우 사용할것을 추천합니다. 
 
-Most WebAPIs including DOM APIs are cannot be used Becuase they are run in Web Worker.
+Most WebAPIs including DOM APIs are cannot be used Becuase they are run in Web Worker.  
 WebWorker에서 실행되므로 DOM API를 포함한 WebAPI를 사용하지 못합니다.  
 
 But you can use WebWorker API.  
@@ -45,30 +45,33 @@ async function runLongTask () {
 
 function getRectCoordinate(imageData: ImageData) {
   const { data, width } = imageData;
-  
-  let sx = Infinity, sy = Infinity;
-  let sw = 0, sh = 0;
+
+  let [
+    minX, minY, 
+    maxX, maxY
+  ] = [Infinity, Infinity, 0, 0];
+
   for(let i = 0, leng = data.length; i < leng; i += 4) {
-    const [r, g, b, a] = [data[i], data[i + 1], data[i+2], data[i+3]];
-    const isFill = Math.max(r, g, b, a) > 0;
+    const [r, g, b, a] = data.slice(i, i+4);
+    const isFilled = Math.max(r, g, b, a) > 0;
     
-    if(isFill) {
-      const y = Math.floor(Math.max(i / 4) / width);
-      const x = Math.max(i / 4) - width * y;
+    if(isFilled) {
+      const y = Math.floor(i / 4 / width);
+      const x = Math.floor(i / 4 - width * y);
 
-      sx = Math.min(sx, x);
-      sw = Math.max(sw, x);
+      minX = Math.min(minX, x);
+      maxX = Math.max(maxX, x);
 
-      sy = Math.min(sy, y);
-      sh = Math.max(sh, y);
+      minY = Math.min(minY, y);
+      maxY = Math.max(maxY, y);
     }
   }
 
   return { 
-    sx: sx === Infinity ? 0 : sx, 
-    sw, 
-    sy: sy === Infinity ? 0 : sy, 
-    sh 
+    x: minX === Infinity ? 0 : minX, 
+    width: maxX, 
+    y: minY === Infinity ? 0 : minY, 
+    height: maxY,
   };
 }
 ```
