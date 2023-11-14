@@ -33,46 +33,44 @@ async function runLongTask () {
 
 ```
 
-**Background**
+**background**
 ```ts
 async function runLongTask () {
-  const background = new Background(getRectCoordinate);
+  const getCoordinate = background((imageData: ImageData) => {
+    const { data, width } = imageData;
 
-  const coordiate = await background.request(
+    let [
+      minX, minY, 
+      maxX, maxY
+    ] = [Infinity, Infinity, 0, 0];
+
+    for(let i = 0, leng = data.length; i < leng; i += 4) {
+      const [r, g, b, a] = data.slice(i, i+4);
+      const isFilled = Math.max(r, g, b, a) > 0;
+      
+      if(isFilled) {
+        const y = Math.floor(i / 4 / width);
+        const x = Math.floor(i / 4 - width * y);
+
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
+
+        minY = Math.min(minY, y);
+        maxY = Math.max(maxY, y);
+      }
+    }
+
+    return { 
+      x: minX === Infinity ? 0 : minX, 
+      width: maxX, 
+      y: minY === Infinity ? 0 : minY, 
+      height: maxY,
+    };
+  })
+
+  const coordiate = await getCoordinate(
     canvas.getContext('2d').getImageData(0, 0, 1000, 1000)
   )
-}
-
-function getRectCoordinate(imageData: ImageData) {
-  const { data, width } = imageData;
-
-  let [
-    minX, minY, 
-    maxX, maxY
-  ] = [Infinity, Infinity, 0, 0];
-
-  for(let i = 0, leng = data.length; i < leng; i += 4) {
-    const [r, g, b, a] = data.slice(i, i+4);
-    const isFilled = Math.max(r, g, b, a) > 0;
-    
-    if(isFilled) {
-      const y = Math.floor(i / 4 / width);
-      const x = Math.floor(i / 4 - width * y);
-
-      minX = Math.min(minX, x);
-      maxX = Math.max(maxX, x);
-
-      minY = Math.min(minY, y);
-      maxY = Math.max(maxY, y);
-    }
-  }
-
-  return { 
-    x: minX === Infinity ? 0 : minX, 
-    width: maxX, 
-    y: minY === Infinity ? 0 : minY, 
-    height: maxY,
-  };
 }
 ```
 
