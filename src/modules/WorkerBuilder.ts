@@ -15,10 +15,9 @@ export class WorkerBuilder {
   ) {
     const code = `
         self.addEventListener('message', event => {
-          const { id, payload } = event.data;
-          const result = (${module.toString()})(payload);
+          const result = (${module.toString()})(event.data);
           
-          self.postMessage({ id, payload: result });
+          self.postMessage(result);
         });
       `.trim();
     const blob = new Blob([code]);

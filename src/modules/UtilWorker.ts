@@ -1,8 +1,7 @@
 
 import { TypedMessageEvent, TypedWorker } from "./TypedWorker";
-import { nanoid } from 'nanoid';
 
-export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response> implements Worker {
+export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response> {
   constructor(scriptURL: string | URL, options?: WorkerOptions) {
     super(scriptURL, options);
   }
@@ -20,20 +19,12 @@ export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response
 
   request<P = Payload, R = Response>(payload: P) {
     return new Promise((resolve: (response: R) => void) => {
-      const id = nanoid();
-      const onMessage = ({ data }: TypedMessageEvent<{ id: string, payload: R }>) => {
-        if (id === data.id) {
-          resolve(data.payload);
-
-          this.removeEventListener('message', onMessage);
-        }
+      const onMessage = ({ data }: TypedMessageEvent<R>) => {
+        resolve(data);
+        this.removeEventListener('message', onMessage);
       };
-      this.postMessage({ id, payload });
+      this.postMessage(payload);
       this.addEventListener('message', onMessage);
     });
-  }
-
-  terminate() {
-    this.terminate();
   }
 }
