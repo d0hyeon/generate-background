@@ -1,8 +1,9 @@
 {
-  "name": "request-background",
-  "description": "Request Background Runtime In Browser",
+  "name": "generate-background",
+  "description": "Generate background runtime",
   "keywords": [
-    "Background Runtime"
+    "background",
+    "Web Worker"
   ],
   "version": "1.0.0",
   "module": "output/index.js",
