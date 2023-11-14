@@ -18,20 +18,6 @@ But you can use WebWorker API.
 [Read More](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope)
 
 ## Example
-**requestBackground**
-```ts
-async function runLongTask () {
-  const result = await requestBackground(() => {
-    let result = 0;
-    for(let i = 0; i < 1_000_000_000_000; i++) {
-      result++;
-    }
-
-    return result;
-  })
-}
-
-```
 
 **generateBackground**
 ```ts
