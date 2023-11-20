@@ -2,10 +2,16 @@ import { UtilWorker } from "./modules/UtilWorker";
 import { WorkerBuilder } from "./modules/WorkerBuilder";
 
 export function background<Payload, ReturnValue>(fn: (payload: Payload) => ReturnValue) {
-  const worker = WorkerBuilder.fromModule(
-    UtilWorker,
-    { module: fn }
-  )
+  function createWorker() {
+    return WorkerBuilder.fromModule(
+      UtilWorker,
+      { module: fn }
+    )
+  }
 
-  return worker.request;
+  if (typeof window === 'undefined') {
+    return (payload: Payload) => createWorker().request(payload)
+  }
+
+  return createWorker().request;
 }
