@@ -3,10 +3,11 @@
     "./src/**.ts"
   ],
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "ES6",
     "moduleResolution": "Node",
     "lib": [
       "WebWorker"
     ],
-  }
+    "declaration": true
+  },
 }
