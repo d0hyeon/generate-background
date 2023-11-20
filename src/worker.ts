@@ -1,7 +1,7 @@
 import { UtilWorker } from "./modules/UtilWorker";
 import { WorkerBuilder } from "./modules/WorkerBuilder";
 
-export function background<Payload, ReturnValue>(fn: (payload: Payload) => ReturnValue) {
+export function worker<Payload, ReturnValue>(fn: (payload: Payload) => ReturnValue) {
   function createWorker() {
     return WorkerBuilder.fromModule(
       UtilWorker,

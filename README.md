@@ -1,10 +1,7 @@
-# Generate Background
-This module does not actually run in the background.  
-이 모듈은 실제로 백그라운드에서 동작하지는 않습니다. 
-
-The actual implementation is Web Worker, and you must use in browser.
+# Generate Worker
+This module is implemented by web worker and must be used only in a browser.
 It also runs in an isolated environment and cannot be referenced by external variables.  
-실제 구현은 웹 워커로 되어있고 반드시 브라우저에서만 사용해야 합니다. 또한 격리된 환경에서 실행되므로 외부의 변수에 참조하지 못합니다.
+웹 워커로 구현되어 있으므로 반드시 브라우저에서만 사용해야 합니다. 또한 격리된 환경에서 실행되므로 외부의 변수에 참조하지 못합니다.
 
 In most cases, this module is not required.
 Recommended for long task  
@@ -15,10 +12,10 @@ WebWorker에서 실행되므로 DOM API를 포함한 WebAPI를 사용하지 못�
 
 ## Example
 
-**background**
+**worker**
 ```ts
 async function runLongTask () {
-  const getCoordinate = background((imageData: ImageData) => {
+  const getCoordinate = worker((imageData: ImageData) => {
     const { data, width } = imageData;
 
     let [

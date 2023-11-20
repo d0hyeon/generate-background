@@ -1,9 +1,9 @@
 {
-  "name": "generate-background",
-  "description": "Generate background runtime",
+  "name": "generate-worker",
+  "description": "Generate Worker runtime",
   "keywords": [
-    "background",
-    "Web Worker"
+    "Web Worker",
+    "Worker"
   ],
   "version": "1.0.0",
   "main": "output/index.js",
