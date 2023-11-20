@@ -6,16 +6,12 @@ The actual implementation is Web Worker, and you must use in browser.
 It also runs in an isolated environment and cannot be referenced by external variables.  
 실제 구현은 웹 워커로 되어있고 반드시 브라우저에서만 사용해야 합니다. 또한 격리된 환경에서 실행되므로 외부의 변수에 참조하지 못합니다.
 
-Most Workrs don't need to using this module.  
+In most cases, this module is not required.
 Recommended for long task  
-대부분의 경우 이 모듈을 사용할 필요는 없으나, long task를 처리해야 할 경우 사용할것을 추천합니다. 
+대부분의 경우 이 모듈을 사용할 필요는 없으나, long task를 처리해야 할 경우 사용할 것을 추천합니다. 
 
 Most WebAPIs including DOM APIs are cannot be used Becuase they are run in Web Worker.  
 WebWorker에서 실행되므로 DOM API를 포함한 WebAPI를 사용하지 못합니다.  
-
-But you can use WebWorker API.  
-대신 웹 워커 API를 사용할 수 있습니다.  
-[Read More](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope)
 
 ## Example
 
