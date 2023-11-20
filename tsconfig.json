@@ -6,7 +6,8 @@
     "target": "ES6",
     "moduleResolution": "Node",
     "lib": [
-      "WebWorker"
+      "WebWorker",
+      "DOM"
     ],
     "declaration": true
   },
