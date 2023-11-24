@@ -1,8 +1,8 @@
 # Web Background
-This module is implemented as a web walker and is available in web browsers.
+This module is implemented as a web walker and is available in web browsers.  
 해당 모듈은 웹 워커로 구현되며 브라우저에서 사용할 수 있습니다. 
 
-It runs in an isolated environment and cannot be referenced by external variables and external module.
+It runs in an isolated environment and cannot be referenced by external variables and external module.  
 격리된 환경에서 실행되므로 외부의 변수에 참조하지 못합니다.
 
 In most cases, this module is not required.
