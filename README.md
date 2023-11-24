@@ -49,7 +49,7 @@ async function runLongTask () {
     };
   })
 
-  const coordiate = await getCoordinate(
+  const coordinate = await getCoordinate(
     canvas.getContext('2d').getImageData(0, 0, 1000, 1000)
   )
 }
