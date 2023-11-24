@@ -1,5 +1,5 @@
 # Web Background
-This module is implemented as a web walker and is available in web browsers.  
+This module is implemented as a Web Worker and is available in web browsers.  
 해당 모듈은 웹 워커로 구현되며 브라우저에서 사용할 수 있습니다. 
 
 It runs in isolation, can't be access external variables and modules  
