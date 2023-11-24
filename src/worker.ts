@@ -17,7 +17,9 @@ export function worker<Payload = never, ReturnValue = void>(fn: (payload: Payloa
       return createWorker().request(payload);
     }
 
-    return runWithCreatingWorker as Payload extends never ? ReturnFn<ReturnValue> : ReturnFnWithPayload<Payload, ReturnValue>;
+    return runWithCreatingWorker as Payload extends never
+      ? ReturnFn<Promise<ReturnValue>>
+      : ReturnFnWithPayload<Payload, Promise<ReturnValue>>;
   }
 
   return createWorker().request;
