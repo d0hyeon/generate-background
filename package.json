@@ -1,5 +1,5 @@
 {
-  "name": "generate-worker",
+  "name": "connect-worker",
   "description": "Generate Worker runtime",
   "keywords": [
     "Web Worker",
