@@ -4,8 +4,8 @@ interface WorkerConstructor<Worker> {
   prototype: Worker;
 }
 
-interface Options<Payload = unknown, ReturnValue = void> extends WorkerOptions {
-  module: (payload: Payload) => ReturnValue;
+interface Options extends WorkerOptions {
+  module: (...args: any[]) => any;
 }
 
 export class WorkerBuilder {
