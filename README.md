@@ -1,4 +1,4 @@
-# Generate Worker
+# Web Background
 This module is implemented as a web walker and is available in web browsers.
 해당 모듈은 웹 워커로 구현되며 브라우저에서 사용할 수 있습니다. 
 
@@ -17,7 +17,7 @@ WebWorker에서 실행되므로 DOM API를 포함한 WebAPI를 사용하지 못�
 **worker**
 ```ts
 async function runLongTask () {
-  const getCoordinate = worker((imageData: ImageData) => {
+  const getCoordinate = background((imageData: ImageData) => {
     const { data, width } = imageData;
 
     let [

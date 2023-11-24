@@ -4,11 +4,11 @@ import { WorkerBuilder } from "./modules/WorkerBuilder";
 type ReturnFn<ReturnValue> = () => ReturnValue;
 type ReturnFnWithPayload<Payload, ReturnValue> = (payload: Payload) => ReturnValue;
 
-export function worker<Payload = never, ReturnValue = void>(fn: (payload: Payload) => ReturnValue) {
+export function background<Payload = never, ReturnValue = void>(fn: (payload: Payload) => ReturnValue) {
   function createWorker(): UtilWorker<Payload, ReturnValue> {
     return WorkerBuilder.fromModule(
       UtilWorker<Payload, ReturnValue>,
-      { module: fn }
+      { module: fn, type: 'module' }
     )
   }
 

@@ -1,13 +1,14 @@
 {
-  "name": "connect-worker",
-  "description": "Generate Worker runtime",
+  "name": "web-background",
+  "description": "Running background in browser Worker",
   "keywords": [
     "Web Worker",
-    "Worker"
+    "Worker",
+    "Background"
   ],
   "version": "0.0.1",
-  "main": "output/index.js",
-  "module": "output/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "type": "module",
   "license": "MIT",
   "scripts": {
