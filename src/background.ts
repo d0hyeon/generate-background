@@ -8,19 +8,20 @@ export function background<Payload = never, ReturnValue = void>(fn: (payload: Pa
   function createWorker(): UtilWorker<Payload, ReturnValue> {
     return WorkerBuilder.fromModule(
       UtilWorker<Payload, ReturnValue>,
-      { module: fn, type: 'module' }
+      { module: fn }
     )
   }
 
   if (typeof window === 'undefined') {
     function runWithCreatingWorker(payload: any) {
-      return createWorker().request(payload);
+      const worker = createWorker();
+      return worker.request.call(worker, payload);
     }
 
     return runWithCreatingWorker as Payload extends never
       ? ReturnFn<Promise<ReturnValue>>
       : ReturnFnWithPayload<Payload, Promise<ReturnValue>>;
   }
-
-  return createWorker().request;
+  const worker = createWorker();
+  return worker.request.bind(worker);
 }
