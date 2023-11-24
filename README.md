@@ -5,7 +5,7 @@ This module is implemented as a Web Worker and is available in web browsers.
 It runs in isolation, cannot be access external variables and modules  
 격리된 환경에서 실행되므로 외부 모듈 및 외부 변수에 접근할 수 없습니다.
 
-In most cases, this module is not required.
+In most cases, You don't have to use it
 Recommended for long task  
 대부분의 경우 이 모듈을 사용할 필요는 없으나, long task를 처리해야 할 경우 사용할 것을 추천합니다. 
 
