@@ -5,7 +5,7 @@
     "Web Worker",
     "Worker"
   ],
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "output/index.js",
   "module": "output/index.js",
   "type": "module",
