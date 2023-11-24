@@ -1,13 +1,13 @@
 
 import { TypedMessageEvent, TypedWorker } from "./TypedWorker";
 
-export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response> {
+export class UtilWorker<Payload = never, Result = void> extends TypedWorker<Payload, Result> {
   constructor(scriptURL: string | URL, options?: WorkerOptions) {
     super(scriptURL, options);
   }
 
-  subscribe<R = Response>(observer: (response: R) => void) {
-    const onMessage = (event: TypedMessageEvent<R>) => {
+  subscribe(observer: (response: Result) => void) {
+    const onMessage = (event: TypedMessageEvent<Result>) => {
       observer(event.data);
     };
     this.addEventListener('message', onMessage);
@@ -17,9 +17,11 @@ export class UtilWorker<Payload, Response> extends TypedWorker<Payload, Response
     };
   }
 
-  request<P = Payload, R = Response>(payload: P) {
-    return new Promise((resolve: (response: R) => void) => {
-      const onMessage = ({ data }: TypedMessageEvent<R>) => {
+  request(): Promise<Result>;
+  request(payload: Payload): Promise<Result>;
+  request(payload?: Payload) {
+    return new Promise<Result>(resolve => {
+      const onMessage = ({ data }: TypedMessageEvent<Result>) => {
         resolve(data);
         this.removeEventListener('message', onMessage);
       };
