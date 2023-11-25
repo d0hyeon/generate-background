@@ -15,7 +15,7 @@ export class WorkerBuilder {
   ) {
     const code = `
         self.addEventListener('message', event => {
-          const result = (${module.toString()})(event.data);
+          const result = (${module.toString()})(${module.length > 1 ? '...event.data' : 'event.data'});
           
           self.postMessage(result);
         });

@@ -1,12 +1,11 @@
 import { UtilWorker } from "./modules/UtilWorker";
 import { WorkerBuilder } from "./modules/WorkerBuilder";
 
-type Result<Payload, ReturnValue> = Payload extends void
-  ? () => ReturnValue
-  : (payload: Payload) => ReturnValue;
+type Result<Payload, ReturnValue> = Payload extends any[]
+  ? (...payloads: Payload) => ReturnValue : (payload: Payload) => ReturnValue
 
-export function background<Payload = void, ReturnValue = void>(
-  fn: (payload: Payload) => ReturnValue
+export function background<Payload extends any[], ReturnValue = void>(
+  fn: (...payloads: Payload) => ReturnValue
 ): Result<Payload, ReturnValue> {
   function createWorker(): UtilWorker<Payload, ReturnValue> {
     return WorkerBuilder.fromModule(
@@ -16,9 +15,9 @@ export function background<Payload = void, ReturnValue = void>(
   }
 
   if (typeof window === 'undefined') {
-    function runWithCreatingWorker(payload: any) {
+    function runWithCreatingWorker(...payload: Payload) {
       const worker = createWorker();
-      return worker.request.call(worker, payload);
+      return worker.request.call(worker, ...payload);
     }
 
     return runWithCreatingWorker as Result<Payload, ReturnValue>;

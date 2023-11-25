@@ -9,8 +9,8 @@ In most cases, You don't have to use it
 Recommended for long task  
 대부분의 경우 이 모듈을 사용할 필요는 없으나, long task를 처리해야 할 경우 사용할 것을 추천합니다. 
 
-Most WebAPIs including DOM APIs are cannot be used Becuase they are run in Web Worker.  
-WebWorker에서 실행되므로 DOM API를 포함한 대부분의 WebAPI를 사용하지 못합니다.  
+Most WebAPIs including DOM APIs are cannot be used.  
+DOM API를 포함한 대부분의 WebAPI를 사용하지 못합니다.  
 [Read More](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
 ## Example
