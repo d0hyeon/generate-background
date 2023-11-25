@@ -3,10 +3,11 @@
   "description": "Running background in browser Worker",
   "keywords": [
     "Web Worker",
-    "Worker",
-    "Background"
+    "Worker Thread",
+    "Background",
+    "Web Background"
   ],
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "type": "module",
