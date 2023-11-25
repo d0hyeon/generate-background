@@ -1,11 +1,11 @@
 import { UtilWorker } from "./modules/UtilWorker";
 import { WorkerBuilder } from "./modules/WorkerBuilder";
 
-type ReturnFn<ReturnValue> = () => ReturnValue;
-type ReturnFnWithPayload<Payload, ReturnValue> = (payload: Payload) => ReturnValue;
-type Result<Payload, ReturnValue> = Payload extends never ? ReturnFn<ReturnValue> : ReturnFnWithPayload<Payload, ReturnValue>;
+type Result<Payload, ReturnValue> = Payload extends void
+  ? () => ReturnValue
+  : (payload: Payload) => ReturnValue;
 
-export function background<Payload = never, ReturnValue = void>(
+export function background<Payload = void, ReturnValue = void>(
   fn: (payload: Payload) => ReturnValue
 ): Result<Payload, ReturnValue> {
   function createWorker(): UtilWorker<Payload, ReturnValue> {
