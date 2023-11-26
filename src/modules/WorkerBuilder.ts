@@ -20,9 +20,17 @@ export class WorkerBuilder {
           self.postMessage(result);
         });
       `.trim();
-    const blob = new Blob([code]);
 
-    return new Worker(URL.createObjectURL(blob), options);
+    const blob = new Blob([code]);
+    const url = URL.createObjectURL(blob);
+    const worker = new Worker(url, options);
+    const originTerminate = worker.terminate;
+
+    worker.terminate = () => {
+      originTerminate.call(worker);
+      URL.revokeObjectURL(url);
+    }
+
+    return worker;
   }
 }
-

@@ -1,5 +1,6 @@
 import { UtilWorker } from "./modules/UtilWorker";
 import { WorkerBuilder } from "./modules/WorkerBuilder";
+import { workerCleanupRegistry } from "./modules/workerCleanupRegistry";
 
 type Result<Payload, ReturnValue> = Payload extends any[]
   ? (...payloads: Payload) => ReturnValue : (payload: Payload) => ReturnValue
@@ -15,13 +16,21 @@ export function background<Payload extends any[], ReturnValue = void>(
   }
 
   if (typeof window === 'undefined') {
-    function runWithCreatingWorker(...payload: Payload) {
+    async function runWithCreatingWorker(...payload: Payload) {
       const worker = createWorker();
-      return worker.request.call(worker, ...payload);
+      const result = await worker.request.call(worker, ...payload);
+      worker.terminate();
+
+      return result;
     }
 
     return runWithCreatingWorker as Result<Payload, ReturnValue>;
   }
+
   const worker = createWorker();
-  return worker.request.bind(worker);
+  const result = worker.request.bind(worker);
+  workerCleanupRegistry.register(result, worker);
+
+  return result;
 }
+
