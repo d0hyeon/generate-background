@@ -16,21 +16,20 @@ export function background<Payload extends any[], ReturnValue = void>(
   }
 
   if (typeof window === 'undefined') {
-    async function runWithCreatingWorker(...payload: Payload) {
-      const worker = createWorker();
-      const result = await worker.request.call(worker, ...payload);
-      worker.terminate();
-
-      return result;
+    let worker: UtilWorker<Payload, ReturnValue> | null = null;
+    function request(...payload: Payload) {
+      worker ??= createWorker();
+      return worker.request.call(worker, ...payload);
     }
 
-    return runWithCreatingWorker as Result<Payload, ReturnValue>;
+    workerCleanupRegistry.register(request, worker);
+    return request as Result<Payload, ReturnValue>;
   }
 
   const worker = createWorker();
-  const result = worker.request.bind(worker);
-  workerCleanupRegistry.register(result, worker);
+  const request = worker.request.bind(worker);
 
-  return result;
+  workerCleanupRegistry.register(request, worker);
+  return request;
 }
 
