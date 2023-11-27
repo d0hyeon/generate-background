@@ -15,21 +15,18 @@ export function background<Payload extends any[], ReturnValue = void>(
     )
   }
 
-  if (typeof window === 'undefined') {
-    let worker: UtilWorker<Payload, ReturnValue> | null = null;
-    function request(...payload: Payload) {
-      worker ??= createWorker();
-      return worker.request.call(worker, ...payload);
+  let worker: UtilWorker<Payload, ReturnValue> | null = null;
+  function request(...payload: Payload) {
+    if (typeof window === 'undefined') {
+      throw new Error('[web-background] You must use background in browser');
     }
-
-    workerCleanupRegistry.register(request, worker);
-    return request as Result<Payload, ReturnValue>;
+    if (worker == null) {
+      worker = createWorker();
+      workerCleanupRegistry.register(request, worker);
+    }
+    return worker.request.call(worker, payload.length > 1 ? payload : payload[0]);
   }
 
-  const worker = createWorker();
-  const request = worker.request.bind(worker);
-
-  workerCleanupRegistry.register(request, worker);
-  return request;
+  return request as Result<Payload, ReturnValue>;
 }
 
