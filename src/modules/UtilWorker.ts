@@ -17,13 +17,13 @@ export class UtilWorker<Payload = never, Result = void> extends TypedWorker<Payl
     };
   }
 
-  request(...payloads: Payload[]) {
+  request(payload: Payload) {
     return new Promise<Result>(resolve => {
       const onMessage = ({ data }: TypedMessageEvent<Result>) => {
         resolve(data);
         this.removeEventListener('message', onMessage);
       };
-      this.postMessage(payloads);
+      this.postMessage(payload);
       this.addEventListener('message', onMessage);
     });
   }
