@@ -13,6 +13,11 @@ Most WebAPIs including DOM APIs are cannot be used.
 DOM API를 포함한 대부분의 WebAPI를 사용하지 못합니다.  
 [Read More](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
 
+To send arguments, you must use data from structured clone algorithm types.
+인자로 전송 가능한 데이터 유형은 복사 가능한 타입의 데이터만 가능합니다. 
+[Read More](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)
+
+
 ## Example
 
 **background**
