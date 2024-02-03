@@ -8,7 +8,7 @@ This module provides background runtime available on the web.
   ```tsx
     type RunFnInBackground<Fn> = (...params: Parameters<Fn>) => Promise<ReturnType<Fn>>;
   
-    background(callback): RunCallbackInBackground<typeof callback>
+    background(callback): RunFnInBackground<typeof callback>
   ```
 
 ## Example
