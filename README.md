@@ -6,7 +6,7 @@ This module provides background runtime available on the web.
 ### background(callback)
   
   ```tsx
-    type RunCallbackInBackground<Callback> = (...params: Parameters<Callback>) => Promise<ReturnType<Callback>>;
+    type RunFnInBackground<Fn> = (...params: Parameters<Fn>) => Promise<ReturnType<Fn>>;
   
     background(callback): RunCallbackInBackground<typeof callback>
   ```
