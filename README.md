@@ -53,7 +53,7 @@ async function runLongTask () {
 - Web Background is implemented as a Web Worker and is available in web browsers.  
 Web Background는 웹 워커로 구현되며 브라우저에서 사용할 수 있습니다. 
 
-- In most cases, you don't need to use it. It's recommended to use it for long working
+- In most cases, you don't need to use it. It's recommended to use it for long working  
 대부분의 경우 이 모듈을 사용할 필요는 없으나, 비용이 큰 작업을 처리해야 할 경우 사용할 것을 추천합니다. 
 
 - Most WebAPIs including DOM APIs are cannot be used.  
