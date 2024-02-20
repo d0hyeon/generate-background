@@ -3,12 +3,12 @@ This module provides background runtime available on the web.
 웹에서 사용할 수 있는 백그라운드 실행환경을 제공합니다. 
 
 ## API
-### background(callback)
+### background(fn)
   
   ```tsx
     type RunFnInBackground<Fn> = (...params: Parameters<Fn>) => Promise<ReturnType<Fn>>;
   
-    background(callback): RunFnInBackground<typeof callback>
+    background<Fn>(fn: Fn): RunFnInBackground<Fn>
   ```
 
 ## Example
