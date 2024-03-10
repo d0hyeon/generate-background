@@ -6,9 +6,9 @@ This module provides background runtime available on the web.
 ### background(fn)
   
   ```tsx
-    type RunFnInBackground<Fn> = (...params: Parameters<Fn>) => Promise<ReturnType<Fn>>;
+    type FunctionInBackground<Fn> = (...params: Parameters<Fn>) => Promise<ReturnType<Fn>>;
   
-    background<Fn>(fn: Fn): RunFnInBackground<Fn>
+    background<Fn>(fn: Fn): FunctionInBackground<Fn>
   ```
 
 ## Example
